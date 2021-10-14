@@ -8,10 +8,7 @@ VOLUME /var/lib/radicale/collections
 VOLUME /etc/radicale
 
 COPY plugins/radicale-auth-ldap /opt/radicale-auth-ldap
-COPY plugins/radicale-rights-ldap /opt/radicale-rights-ldap
-
 RUN  cd /opt/radicale-auth-ldap && python3 -m pip install .
-RUN cd /opt/radicale-rights-ldap && python3 -m pip install .
 
 # Copy config file to radicale folder config
 COPY config /etc/radicale/config/config
