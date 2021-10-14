@@ -7,6 +7,8 @@ VOLUME /var/lib/radicale/collections
 # Configuration data (Put the "config" file here!)
 VOLUME /etc/radicale
 
+RUN apk add --no-cache git
+
 RUN python3 -m pip install git+https://github.com/Unrud/RadicaleInfCloud
 
 COPY radicale_cloudron_ldap_auth /opt/radicale_cloudron_ldap_auth
