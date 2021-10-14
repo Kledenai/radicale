@@ -1,11 +1,18 @@
 FROM python:3-alpine
 
 # Version of Radicale (e.g. 3.0.x)
-ARG VERSION=master
+ARG VERSION=3.0.6
 # Persistent storage for data (Mount it somewhere on the host!)
 VOLUME /var/lib/radicale/collections
 # Configuration data (Put the "config" file here!)
 VOLUME /etc/radicale
+
+COPY plugins/radicale-auth-ldap /opt/radicale-auth-ldap
+COPY plugins/radicale-rights-ldap /opt/radicale-rights-ldap
+
+RUN  cd /opt/radicale-auth-ldap && python3 -m pip install .
+RUN cd /opt/radicale-rights-ldap && python3 -m pip install .
+
 # Copy config file to radicale folder config
 COPY config /etc/radicale/config/config
 # TCP port of Radicale (Publish it on a host interface!)
