@@ -84,7 +84,7 @@ class Auth(BaseAuth):
 
     server = ldap3.Server(self.ldap_url)
     conn = ldap3.Connection(server=server, user=self.ldap_binddn,
-                            password=self.ldap_password, client_strategy=SAFE_SYNC, auto_bind=True)
+                            password=self.ldap_password, client_strategy=ldap3.SAFE_SYNC, auto_bind=True)
     conn.open()
     conn.bind()
 
