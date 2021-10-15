@@ -82,10 +82,9 @@ class Auth(BaseAuth):
     if login == "" or password == "":
         return ""
 
-    server = ldap3.Server(self.ldap_url, get_info=ldap3.ALL)
+    server = ldap3.Server(self.ldap_url)
     conn = ldap3.Connection(server=server, user=self.ldap_binddn,
-                            password=self.ldap_password, check_names=True,
-                            lazy=False, raise_exceptions=False)
+                            password=self.ldap_password, client_strategy=SAFE_SYNC, auto_bind=True)
     conn.open()
     conn.bind()
 
@@ -95,7 +94,7 @@ class Auth(BaseAuth):
         logger.error(conn.result)
         return ""
 
-    final_search_filter = self.ldap_filter.replace("%username", login)
+    final_search_filter = "(&(objectclass=user)(|(username=brunos)))"
     conn.search(search_base=self.ldap_base,
                 search_filter=final_search_filter,
                 attributes=ldap3.ALL_ATTRIBUTES)
@@ -113,7 +112,7 @@ class Auth(BaseAuth):
     conn.unbind()
 
     # new connection to check the password as we cannot rebind here
-    conn = ldap3.Connection(server=server, user=final_user_dn,
+    conn = ldap3.Connection(server=server, user="brunos@sharenj.org",
                             password=password, check_names=True,
                             lazy=False, raise_exceptions=False)
     conn.open()
