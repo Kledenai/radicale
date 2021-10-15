@@ -2,6 +2,6 @@
 
 from distutils.core import setup
 
-setup(name="radicale_cloudron_ldap_auth",
-      packages=["radicale_cloudron_ldap_auth"],
+setup(name="radicale_ldap_auth",
+      packages=["radicale_ldap_auth"],
       install_requires=["ldap3"])
