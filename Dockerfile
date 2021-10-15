@@ -9,7 +9,7 @@ VOLUME /etc/radicale
 
 RUN apk add --no-cache git
 
-RUN python3 -m pip install git+https://github.com/Unrud/RadicaleInfCloud
+RUN /usr/local/bin/python3 -m pip install --upgrade pip
 
 COPY radicale_ldap_auth /opt/radicale_ldap_auth
 RUN  cd /opt/radicale_ldap_auth && python3 -m pip install .
