@@ -89,7 +89,7 @@ class Auth(BaseAuth):
     conn.open()
     conn.bind()
 
-    logger.info(conn.result)
+    logger.warning(conn.result)
 
     if conn.result["result"] != 0:
         logger.error(conn.result)
@@ -107,7 +107,7 @@ class Auth(BaseAuth):
     if len(conn.response) == 0:
         return ""
 
-    logger.info(conn.response)
+    logger.warning(conn.response)
 
     final_user_dn = conn.response[0]["dn"]
     conn.unbind()
