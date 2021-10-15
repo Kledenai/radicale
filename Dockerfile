@@ -11,8 +11,8 @@ RUN apk add --no-cache git
 
 RUN python3 -m pip install git+https://github.com/Unrud/RadicaleInfCloud
 
-COPY radicale_cloudron_ldap_auth /opt/radicale_cloudron_ldap_auth
-RUN  cd /opt/radicale_cloudron_ldap_auth && python3 -m pip install .
+COPY radicale_ldap_auth /opt/radicale_ldap_auth
+RUN  cd /opt/radicale_ldap_auth && python3 -m pip install .
 
 # Copy config file to radicale folder config
 COPY config /etc/radicale/config/config
